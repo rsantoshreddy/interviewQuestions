@@ -74,11 +74,12 @@ It's worth mentioning that React internally has a concept of phases when applyin
 
 React 16.3+ Phases (or an [interactive version](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/))
 
-![phases 16.4+](images/phases16.4.png)
+![image](https://user-images.githubusercontent.com/6243528/186761818-61fe3f74-fec9-4204-87e1-623d2a572a94.png)
+
 
 Before React 16.3
 
-![phases 16.2](images/phases.png)
+![image](https://user-images.githubusercontent.com/6243528/186762258-fd3f2db4-4469-4899-b25e-6c37d7abf4ba.png)
 
 ### 3. What are the lifecycle methods of React?
 
