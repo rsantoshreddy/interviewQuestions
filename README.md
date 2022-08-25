@@ -1,6 +1,335 @@
 # Interview Questions
 
 <h2 align="center">
+ JavaScript
+</h2>
+
+## Basic:
+
+###  1. What are the possible ways to create objects in JavaScript?
+There are many ways to create objects in javascript as below
+
+1. **Object constructor:**
+
+The simplest way to create an empty object is using the Object constructor. Currently this approach is not recommended.
+
+```javascript
+var object = new Object();
+```
+
+2. **Object's create method:**
+
+The create method of Object creates a new object by passing the prototype object as a parameter
+
+```javascript
+var object = Object.create(null);
+```
+
+3. **Object literal syntax:**
+
+The object literal syntax (or object initializer), is a comma-separated set of name-value pairs wrapped in curly braces.
+
+```javascript
+var object = {
+  name: "Sudheer"
+  age: 34
+};
+
+Object literal property values can be of any data type, including array, function, and nested object.
+```
+
+**Note:** This is an easiest way to create an object
+
+4. **Function constructor:**
+
+Create any function and apply the new operator to create object instances,
+
+```javascript
+function Person(name) {
+  this.name = name;
+  this.age = 21;
+}
+var object = new Person("Sudheer");
+```
+
+5. **Function constructor with prototype:**
+
+This is similar to function constructor but it uses prototype for their properties and methods,
+
+```javascript
+function Person() {}
+Person.prototype.name = "Sudheer";
+var object = new Person();
+```
+
+This is equivalent to an instance created with an object create method with a function prototype and then call that function with an instance and parameters as arguments.
+
+```javascript
+function func() {};
+
+new func(x, y, z);
+```
+
+**(OR)**
+
+```javascript
+// Create a new instance using function prototype.
+var newInstance = Object.create(func.prototype)
+
+// Call the function
+var result = func.call(newInstance, x, y, z),
+
+// If the result is a non-null object then use it otherwise just use the new instance.
+console.log(result && typeof result === 'object' ? result : newInstance);
+```
+
+6. **ES6 Class syntax:**
+
+ES6 introduces class feature to create the objects
+
+```javascript
+class Person {
+  constructor(name) {
+ this.name = name;
+  }
+}
+
+var object = new Person("Sudheer");
+```
+
+7. **Singleton pattern:**
+
+A Singleton is an object which can only be instantiated one time. Repeated calls to its constructor return the same instance and this way one can ensure that they don't accidentally create multiple instances.
+
+```javascript
+var object = new (function () {
+  this.name = "Sudheer";
+})();
+```
+### 2. What is the difference between Call, Apply and Bind?
+ The difference between Call, Apply and Bind can be explained with below examples,
+
+**Call:** The call() method invokes a function with a given `this` value and arguments provided one by one
+
+```javascript
+var employee1 = { firstName: "John", lastName: "Rodson" };
+var employee2 = { firstName: "Jimmy", lastName: "Baily" };
+
+function invite(greeting1, greeting2) {
+  console.log(
+ greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
+  );
+}
+
+invite.call(employee1, "Hello", "How are you?"); // Hello John Rodson, How are you?
+invite.call(employee2, "Hello", "How are you?"); // Hello Jimmy Baily, How are you?
+```
+
+**Apply:** Invokes the function with a given `this` value and allows you to pass in arguments as an array
+
+```javascript
+var employee1 = { firstName: "John", lastName: "Rodson" };
+var employee2 = { firstName: "Jimmy", lastName: "Baily" };
+
+function invite(greeting1, greeting2) {
+  console.log(
+ greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
+  );
+}
+
+invite.apply(employee1, ["Hello", "How are you?"]); // Hello John Rodson, How are you?
+invite.apply(employee2, ["Hello", "How are you?"]); // Hello Jimmy Baily, How are you?
+```
+
+**bind:** returns a new function, allowing you to pass any number of arguments
+
+```javascript
+var employee1 = { firstName: "John", lastName: "Rodson" };
+var employee2 = { firstName: "Jimmy", lastName: "Baily" };
+
+function invite(greeting1, greeting2) {
+  console.log(
+ greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
+  );
+}
+
+var inviteEmployee1 = invite.bind(employee1);
+var inviteEmployee2 = invite.bind(employee2);
+inviteEmployee1("Hello", "How are you?"); // Hello John Rodson, How are you?
+inviteEmployee2("Hello", "How are you?"); // Hello Jimmy Baily, How are you?
+```
+
+Call and apply are pretty interchangeable. Both execute the current function immediately. You need to decide whether it’s easier to send in an array or a comma separated list of arguments. You can remember by treating Call is for **comma** (separated list) and Apply is for **Array**.
+
+Whereas Bind creates a new function that will have `this` set to the first parameter passed to bind().
+### 3. What is the difference between slice and splice?
+Some of the major difference in a tabular form
+
+| Slice                                        | Splice                                          |
+| -------------------------------------------- | ----------------------------------------------- |
+| Doesn't modify the original array(immutable) | Modifies the original array(mutable)            |
+| Returns the subset of original array         | Returns the deleted elements as array           |
+| Used to pick the elements from array         | Used to insert or delete elements to/from array |
+
+### 4.  What is the difference between == and === operators?
+JavaScript provides both strict(===, !==) and type-converting(==, !=) equality comparison. The strict operators take type of variable in consideration, while non-strict operators make type correction/conversion based upon values of variables. The strict operators follow the below conditions for different types,
+
+1. Two strings are strictly equal when they have the same sequence of characters, same length, and same characters in corresponding positions.
+2. Two numbers are strictly equal when they are numerically equal. i.e, Having the same number value.
+There are two special cases in this,
+1. NaN is not equal to anything, including NaN.
+2. Positive and negative zeros are equal to one another.
+3. Two Boolean operands are strictly equal if both are true or both are false.
+4. Two objects are strictly equal if they refer to the same Object.
+5. Null and Undefined types are not equal with ===, but equal with ==. i.e,
+null===undefined --> false but null==undefined --> true
+
+Some of the example which covers the above cases,
+
+```javascript
+0 == false// true
+0 === false  // false
+1 == "1"  // true
+1 === "1" // false
+null == undefined // true
+null === undefined // false
+'0' == false // true
+'0' === false // false
+[]==[] or []===[] //false, refer different objects in memory
+{}=={} or {}==={} //false, refer different objects in memory
+```
+### 5. What is the currying function?
+Currying is the process of taking a function with multiple arguments and turning it into a sequence of functions each with only a single argument. Currying is named after a mathematician **Haskell Curry**. By applying currying, a n-ary function turns it into a unary function.
+
+Let's take an example of n-ary function and how it turns into a currying function,
+
+```javascript
+const multiArgFunction = (a, b, c) => a + b + c;
+console.log(multiArgFunction(1, 2, 3)); // 6
+
+const curryUnaryFunction = (a) => (b) => (c) => a + b + c;
+curryUnaryFunction(1); // returns a function: b => c =>  1 + b + c
+curryUnaryFunction(1)(2); // returns a function: c => 3 + c
+curryUnaryFunction(1)(2)(3); // returns the number 6
+```
+
+Curried functions are great to improve **code reusability** and **functional composition**.
+
+## Advanced
+### 1. What is a pure function?
+A **Pure function** is a function where the return value is only determined by its arguments without any side effects. i.e, If you call a function with the same arguments 'n' number of times and 'n' number of places in the application then it will always return the same value.
+
+Let's take an example to see the difference between pure and impure functions,
+
+```javascript
+//Impure
+let numberArray = [];
+const impureAddNumber = (number) => numberArray.push(number);
+//Pure
+const pureAddNumber = (number) => (argNumberArray) =>
+  argNumberArray.concat([number]);
+
+//Display the results
+console.log(impureAddNumber(6)); // returns 1
+console.log(numberArray); // returns [6]
+console.log(pureAddNumber(7)(numberArray)); // returns [6, 7]
+console.log(numberArray); // returns [6]
+```
+
+As per the above code snippets, the **Push** function is impure itself by altering the array and returning a push number index independent of the parameter value. . Whereas **Concat** on the other hand takes the array and concatenates it with the other array producing a whole new array without side effects. Also, the return value is a concatenation of the previous array.
+
+Remember that Pure functions are important as they simplify unit testing without any side effects and no need for dependency injection. They also avoid tight coupling and make it harder to break your application by not having any side effects. These principles are coming together with **Immutability** concept of ES6 by giving preference to **const** over **let** usage.
+
+### 2. What is the difference between let and var?
+You can list out the differences in a tabular format
+
+| var                                                   | let                         |
+| ----------------------------------------------------- | --------------------------- |
+| It is been available from the beginning of JavaScript | Introduced as part of ES6   |
+| It has function scope                                 | It has block scope          |
+| Variables will be hoisted                             | Hoisted but not initialized |
+
+Let's take an example to see the difference,
+
+```javascript
+function userDetails(username) {
+  if (username) {
+console.log(salary); // undefined due to hoisting
+console.log(age); // ReferenceError: Cannot access 'age' before initialization
+let age = 30;
+var salary = 10000;
+  }
+  console.log(salary); //10000 (accessible to due function scope)
+  console.log(age); //error: age is not defined(due to block scope)
+}
+userDetails("John");
+```
+### 3. What is the Temporal Dead Zone?
+The Temporal Dead Zone is a behavior in JavaScript that occurs when declaring a variable with the let and const keywords, but not with var. In ECMAScript 6, accessing a `let` or `const` variable before its declaration (within its scope) causes a ReferenceError. The time span when that happens, between the creation of a variable’s binding and its declaration, is called the temporal dead zone.
+
+Let's see this behavior with an example,
+
+```javascript
+function somemethod() {
+  console.log(counter1); // undefined
+  console.log(counter2); // ReferenceError
+  var counter1 = 1;
+  let counter2 = 2;
+}
+```
+### 4. What is Hoisting?
+ Hoisting is a JavaScript mechanism where variables, function declarations and classes are moved to the top of their scope before code execution. Remember that JavaScript only hoists declarations, not initialisation.
+Let's take a simple example of variable hoisting,
+
+```javascript
+console.log(message); //output : undefined
+var message = "The variable Has been hoisted";
+```
+
+The above code looks like as below to the interpreter,
+
+```javascript
+var message;
+console.log(message);
+message = "The variable Has been hoisted";
+```
+
+In the same fashion, function declarations are hoisted too
+
+```javascript
+message("Good morning"); //Good morning
+
+function message(name) {
+  console.log(name);
+}
+```
+
+This hoisting makes functions to be safely used in code before they are declared.
+
+### 5. What are closures?
+ A closure is the combination of a function and the lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables. The closure has three scope chains
+
+1. Own scope where variables defined between its curly brackets
+2. Outer function’s variables
+3. Global variables
+
+Let's take an example of closure concept,
+
+```javascript
+function Welcome(name) {
+  var greetingInfo = function (message) {
+console.log(message + " " + name);
+  };
+  return greetingInfo;
+}
+var myFunction = Welcome("John");
+myFunction("Welcome "); //Output: Welcome John
+myFunction("Hello Mr."); //output: Hello Mr.John
+```
+
+As per the above code, the inner function(i.e, greetingInfo) has access to the variables in the outer function scope(i.e, Welcome) even after the outer function has returned.
+
+<h2 align="center">
  React
 </h2>
 
