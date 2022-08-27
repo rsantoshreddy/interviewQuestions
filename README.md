@@ -468,7 +468,477 @@ Comparing Redux & Context API
 | UI logic and State Management Logic are in the same component	  | Better code organization with separate UI logic and State Management Logic  |
 	
 	
-	
+<h2 align="center">
+ HTML
+</h2>
 
+## Basics
+
+### 1. What are the entities in HTML?
+The HTML character entities are used as a replacement for reserved characters in HTML. You can also replace characters that are not present on your keyboard by entities. These characters are replaced because some characters are reserved in HTML.
+```html
+<h2>The greater-than sign: &gt;</h2>
+```
+### 2.  What are the different new form element types in HTML 5?
+
+Following is a list of 10 frequently used new elements in HTML 5:
+Color
+Date
+Datetime-local
+Email
+Time
+Url
+Range
+Telephone
+Number
+Search
+
+### 3. What is the difference between progress and meter tag?
+The progress element represents the completion progress of a task. The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate.
+
+### 4. What is the difference between a block-level element and an inline element?
+
+| Block                                                   | Inline                         |
+| ----------------------------------------------------- | --------------------------- |
+| A block-level element is drawn as a block that stretches to fill the full width available to it i.e, the width of its container and will always start on a new line. <br/>Elements that are block-level by default: <br/> ```html <div>, <img>, <section>, <form>, <nav> ```.| Inline elements are drawn where they are defined and only take up space that is absolutely needed. The easiest way to understand how they work is to look at how text flows on a page. <br/>Examples of elements that are inline by default: <br/>```html <span>, <b>, <strong>, <a>, <input>```.   |
+
+### 5. What is semantic HTML?
+Semantic HTML is a coding style. It is the use of HTML markup to reinforce the semantics or meaning of the content. For example: In semantic HTML
+```html <b> </b>``` tag is not used for bold statement as well as ```html <i> </i>``` tag is used for italic. Instead of these we use ```html <strong></strong>``` and ```html<em></em>``` tags.
+
+### 6. Explain The Key Differences Between LocalStorage And SessionStorage Objects.
+The key differences between localStorage and sessionStorage objects are as follows:
+
+* The localStorage object stores the data without an expiry date. However, sessionStorage object stores the data for only one session.
+* In the case of a localStorage object, data will not delete when the browser window closes. However, the data gets deleted if the browser window closes, in the case of sessionStorage objects.
+* The data in sessionStorage is accessible only in the current window of the browser. But, the data in the localStorage can be shared between multiple windows of the browser.
+
+<h2 align="center">
+ CSS
+</h2>
+
+## Basics
+
+### 1. What is the Box model in CSS? Which CSS properties are a part of it?
+A rectangle box is wrapped around every HTML element. The box model is used to determine the height and width of the rectangular box. The CSS Box consists of Width and height (or in the absence of that, default values and the content inside), padding, borders, margin.
+
+![image](https://user-images.githubusercontent.com/6243528/187034617-878f36b5-4cca-4bfe-a601-ae22d79540db.png)
+
+* Content:  Actual Content of the box where the text or image is placed.
+* Padding: Area surrounding the content (Space between the border and content).
+* Border: Area surrounding the padding.
+* Margin: Area surrounding the border.
+
+### 2. What are the different types of Selectors in CSS?
+A CSS selector is the part of a CSS ruleset that actually selects the content you want to style. Different types of selectors are listed below.
+
+<b>Universal Selector</b>: The universal selector works like a wildcard character, selecting all elements on a page. In the given example, the provided styles will get applied to all the elements on the page.
+```css
+* {
+  color: "green";
+  font-size: 20px;
+  line-height: 25px;
+}
+```
+<b>Element Type Selector</b>: This selector matches one or more HTML elements of the same name. In the given example, the provided styles will get applied to all the ul elements on the page.
+```css
+ul {
+  line-style: none;
+  border: solid 1px #ccc;
+}
+```
+<b>ID Selector</b>: This selector matches any HTML element that has an ID attribute with the same value as that of the selector. In the given example, the provided styles will get applied to all the elements having ID as a container on the page.
+```css
+#container {
+  width: 960px;
+  margin: 0 auto;
+}
+```
+
+```html
+<div id="container"></div>
+```
+<b>Class Selector</b>: The class selector also matches all elements on the page that have their class attribute set to the same value as the class.  In the given example, the provided styles will get applied to all the elements having ID as the box on the page.
+```css
+.box {
+  padding: 10px;
+  margin: 10px;
+  width: 240px;
+}
+```
+```html
+<div class="box"></div>
+```
+<b>Descendant Combinator</b>: The descendant selector or, more accurately, the descendant combinator lets you combine two or more selectors so you can be more specific in your selection method.
+```css
+#container .box {
+	float: left;
+	padding-bottom: 15px;
+} 
+
+<div id="container">
+	<div class="box"></div>
 	
-Credit goes to https://github.com/sudheerj
+	<div class="box-2"></div>
+</div>
+
+<div class=”box”></div>
+```
+This declaration block will apply to all elements that have a class of box that is inside an element with an ID of the container. It’s worth noting that the .box element doesn’t have to be an immediate child: there could be another element wrapping .box, and the styles would still apply.
+
+<b>Child Combinator</b>: A selector that uses the child combinator is similar to a selector that uses a descendant combinator, except it only targets immediate child elements.
+```css
+#container> .box {
+	float: left;
+	padding-bottom: 15px;
+}
+
+<div id="container">
+	<div class="box"></div>
+	
+	<div>
+		<div class="box"></div>
+	</div>
+</div>
+```
+The selector will match all elements that have a class of box and that are immediate children of the #container element. That means, unlike the descendant combinator, there can’t be another element wrapping .box it has to be a direct child element.
+
+<b>General Sibling Combinator</b>: A selector that uses a general sibling combinator to match elements based on sibling relationships. The selected elements are beside each other in the HTML.
+```css
+h2 ~ p {
+	margin-bottom: 20px;
+}
+
+<h2>Title</h2>
+<p>Paragraph example.</p>
+<p>Paragraph example.</p>
+<p>Paragraph example.</p>
+<div class=”box”>
+	<p>Paragraph example.</p>
+</div>
+```
+In this example, all paragraph elements (```<p>```) will be styled with the specified rules, but only if they are siblings of ```<h2>``` elements. There could be other elements in between the ```<h2>``` and ```<p>```, and the styles would still apply.
+
+<b>Adjacent Sibling Combinator</b>: A selector that uses the adjacent sibling combinator uses the plus symbol (+), and is almost the same as the general sibling selector. The difference is that the targeted element must be an immediate sibling, not just a general sibling.
+```css
+p + p {
+	text-indent: 1.Sem;
+	margin-bottom: 0;
+}
+<h2>Title</h2>
+<p>Paragraph example.</p>
+<p>Paragraph example.</p>
+<p>Paragraph example.</p>
+
+<div class=”box”>
+	<p>Paragraph example.</p>
+	<p>Paragraph example.</p>
+</div>
+```
+The above example will apply the specified styles only to paragraph elements that immediately follow other paragraph elements. This means the first paragraph element on a page would not receive these styles. Also, if another element appeared between two paragraphs, the second paragraph of the two wouldn’t have the styles applied.
+
+<b>Attribute Selector</b>: The attribute selector targets elements based on the presence and/or value of HTML attributes, and is declared using square brackets.
+```css
+input [type=”text”] {
+	background-color: #444;
+	width: 200px;
+}
+
+<input type="text">
+```
+<b>Pseudo-classes Selector</b>: A pseudo-class is used to define a special state of an element.
+
+For example, it can be used to:
+* Style an element when a user mouses over it
+* Style visited and unvisited links differently
+* Style an element when it gets focus
+
+```css
+input [type=”text”] {
+	background-color: #444;
+	width: 200px;
+}
+
+<input type="text">
+```
+### 4. What are Pseudo elements and Pseudo classes?
+Pseudo-elements allows us to create items that do not normally exist in the document tree, for example ::after.
+
+::before
+::after
+::first-letter
+::first-line
+::selection
+
+In the below example, the color will appear only on the first line of the paragraph.
+```css
+p: :first-line {
+	color: #ffOOOO;
+	font-variant: small-caps;
+}
+```
+Pseudo-classes select regular elements but under certain conditions like when the user is hovering over the link.
+
+:link
+:visited
+:hover
+:active
+:focus
+Example of the pseudo-class, In the below example, the color applies to the anchor tag when it’s hovered.
+```css
+/* mouse over link */
+a:hover {
+	color: #FFOOFF;
+}
+```
+### 4. What is the difference between inline, inline-block, and block?
+<b>Block Element</b>: The block elements always start on a new line. They will also take space for an entire row or width. List of block elements are ```<div>, <p>```.
+
+<b>Inline Elements<b>: Inline elements don't start on a new line, they appear on the same line as the content and tags beside them. Some examples of inline elements are ```<a>, <span> , <strong>,``` and ```<img>`` tags. 
+
+<b>Inline Block Elements</b>: Inline-block elements are similar to inline elements, except they can have padding and margins and set height and width values.
+
+### 5. How is border-box different from content-box?
+
+```content-box``` is the default value box-sizing property. The height and the width properties consist only of the content by excluding the border and padding. Consider an example as shown:
+```css
+div{
+    width:300px;
+    height:200px;
+    padding:15px;
+    border: 5px solid grey;
+    margin:30px;
+    -moz-box-sizing:content-box;
+    -webkit-box-sizing:content-box;
+    box-sizing:content-box;
+}
+```
+Here, the box-sizing for the div element is given as content-box. That means, the height and width considered for the div content exclude the padding and border. We will get full height and width parameters specified for the content as shown in the below image.
+
+![image](https://user-images.githubusercontent.com/6243528/187038330-65a49fdd-fbe3-404e-bb41-971d95e59ddf.png)
+
+The border-box property includes the content, padding and border in the height and width properties. Consider an example as shown:
+```css
+div{
+    width:300px;
+    height:200px;
+    padding:15px;
+    border: 5px solid grey;
+    margin:30px;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+}
+```
+Here, the box-sizing for the div element is given as border-box. That means the height and width considered for the div content will also include the padding and border. This means that the actual height of the div content will be:
+```
+actual height = height - 
+                padding on top and bottom - 
+                border on top and bottom
+              = 200 - (15*2) - (5*2) 
+              = 160 px
+```
+and the actual width of the div content would be:
+```
+actual width  = width - 
+                padding on right and left - 
+                border on right and left
+              = 300 - (15*2) - (5*2) 
+              = 260 px
+```
+This is represented in the image below:
+
+![image](https://user-images.githubusercontent.com/6243528/187038308-05e8299f-3e18-41d9-bfa9-771d3fca39cf.png)
+
+## Advanced
+
+### 1. Explain CSS position property?
+<b>Absolute</b>: To place an element exactly where you want to place it. absolute position is actually set relative to the element's parent. if no parent is available then the relative place to the page itself (it will default all the way back up to the element).
+<b>Relative</b>: "Relative to itself". Setting position: relative; on an element and no other positioning attributes, it will no effect on its positioning. It allows the use of z-index on the element and it limits the scope of absolutely positioned child elements. Any child element will be absolutely positioned within that block. 
+<b>Fixed</b>: The element is positioned relative to the viewport or the browser window itself. viewport doesn't change if you scroll and hence the fixed element will stay right in the same position. 
+<b>Static</b>: Static default for every single page element. The only reason you would ever set an element to position: static is to forcefully remove some positioning that got applied to an element outside of your control.
+<b>Sticky</b>: Sticky positioning is a hybrid of relative and fixed positioning. The element is treated as relative positioned until it crosses a specified threshold, at which point it is treated as fixed positioned.
+
+### 2. Different Box Sizing Property?
+The box-sizing CSS property sets how the total width and height of an element are calculated.
+
+<b>Content-box</b>: The default width and height values apply to the element's content only. The padding and border are added to the outside of the box.
+<b>Padding-box</b>: Width and height values apply to the element's content and its padding. The border is added to the outside of the box. Currently, only Firefox supports the padding-box value.
+<b>Border-box</b>: Width and height values apply to the content, padding, and border.
+
+### 3. How to center align a div inside another div?
+
+* <b>Centering with Table</b>:
+HTML:
+
+```css
+<div class=”cn”><div class=”inner”>your content</div></div>
+CSS:
+
+.cn {
+	display: table-cell;
+	width: 500px;
+	height: 500px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.inner {
+	display: inline-block;
+	width: 200px; height: 200px;
+}
+```
+* <b>Centering with Transform</b>
+HTML:
+```css
+<div class="cn"><div class="inner">your content</div></div>
+```
+CSS:
+```css
+.cn {
+	position: relative;
+	width: 500px;
+	height: 500px;
+}
+
+.inner {
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%,-50%);
+	width: 200px;
+	height: 200px;
+}
+```
+* <b>Centering with Flexbox</b>
+HTML:
+```css
+<div class="cn"><div class="inner">your content</div></div>
+```
+CSS:
+```css
+.cn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+```
+* <b>Centering with Grid</b>
+HTML:
+```css
+<div class=”wrap_grid”>
+	<div id=”container”>vertical aligned text<br />some more text here
+	</div>
+</div>
+```
+CSS:
+```css
+.wrap-grid {
+	display: grid;
+	place-content: center;
+}
+```
+
+### 4. Difference between CSS grid vs flexbox?
+
+The basic difference between CSS Grid Layout and CSS Flexbox Layout is that flexbox was designed for layout in one dimension - either a row or a column. Grid was designed for two-dimensional layout - rows, and columns at the same time. The two specifications share some common features, however, and if you have already learned how to use flexbox, the similarities should help you get to grips with Grid.
+
+One-dimensional versus two-dimensional layout
+A simple example can demonstrate the difference between one- and two-dimensional layouts.
+
+In this first example, I am using flexbox to lay out a set of boxes. I have five child items in my container, and I have given the flex properties values so that they can grow and shrink from a flex-basis of 150 pixels.
+
+I have also set the flex-wrap property to wrap, so that if the space in the container becomes too narrow to maintain the flex basis, items will wrap onto a new row.
+
+```css
+<div class="wrapper">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+  <div>Four</div>
+  <div>Five</div>
+</div>
+
+
+.wrapper {
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper > div {
+  flex: 1 1 150px;
+}
+
+```
+![image](https://user-images.githubusercontent.com/6243528/187037923-2715bb68-3fdd-4ed7-8f9b-6b7ae94ac41e.png)
+
+In the image, you can see that two items have wrapped onto a new line. These items are sharing the available space and not lining up underneath the items above. This is because when you wrap flex items, each new row (or column when working by column) is an independent flex line in the flex container. Space distribution happens across the flex line.
+
+A common question then is how to make those items line up. This is where you want a two-dimensional layout method: You want to control the alignment by row and column, and this is where grid comes in.
+
+The same layout with CSS grids
+In this next example, I create the same layout using Grid. This time we have three 1fr column tracks. We do not need to set anything on the items themselves; they will lay themselves out one into each cell of the created grid. As you can see they stay in a strict grid, lining up in rows and columns. With five items, we get a gap on the end of row two.
+```css
+<div class="wrapper">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+  <div>Four</div>
+  <div>Five</div>
+</div>
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+```
+![image](https://user-images.githubusercontent.com/6243528/187037953-e12c0dee-f185-4ed7-8fd8-07155d57aff1.png)
+
+A simple question to ask yourself when deciding between grid or flexbox is:
+
+do I only need to control the layout by row or column – use a flexbox
+do I need to control the layout by row and column – use a grid
+
+### 5. What is specificity? How to calculate specificity?
+A process of determining which CSS rule will be applied to an element. It actually determines which rules will take precedence. Inline style usually wins then ID then the class value (or pseudo-class or attribute selector), the universal selector (*) has no specificity. ID selectors have a higher specificity than attribute selectors.
+
+### 6. What is progressive rendering? How do you implement progressive rendering in the website?. What are the advantages of it?
+Progressive rendering is the name given to techniques used to improve the performance of a webpage (in particular, improve perceived load time) to render content for display as quickly as possible.
+
+We can implement the progressive rendering of the page by loading the lazy loading of the images.  We can use Intersection Observer API to lazy load the image. The API makes it simple to detect when an element enters the viewport and take an action when it does. Once the image enters the viewport, we will start loading the images.
+
+A sample snippet is given below.
+
+```css
+<img class="lazy"
+src="placeholder-image.jpg"
+data-src="image-to-lazy-load-1x.jpg"
+data-srcset="image-to-lazy-load-2x.jpg 2x, image-to-lazy-load-1x.jpg 1x"
+alt="I'm an image!">
+```
+```javascript
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target;
+          lazyImage.src = lazyImage.dataset.src;
+          lazyImage.srcset = lazyImage.dataset.srcset;
+          lazyImage.classList.remove("lazy");
+          lazyImageObserver.unobserve(lazyImage);
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage);
+    });
+  } else {
+    // Possibly fall back to event handlers here
+  }
+});
+```
+
+Credit goes to https://github.com/sudheerj and Myself :)
